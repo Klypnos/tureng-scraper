@@ -40,7 +40,11 @@ class Dictionary:
             meanings.write(word + ":\n")
             counter = 0
             #lookup tureng
-            r = urllib.urlopen('http://tureng.com/tr/turkce-ingilizce/' + word).read()
+            try:
+                r = urllib.urlopen('http://tureng.com/tr/turkce-ingilizce/' + word).read()
+            except:
+                print "No internet connection."
+                sys.exit()
             soup = BeautifulSoup(r,"lxml")
             x = soup.find_all('td')
             # write to meanings file
